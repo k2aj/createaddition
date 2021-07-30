@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import com.mrh0.createaddition.config.Config;
 
 public class FurnaceBurnerTileEntity extends AbstractFurnaceTileEntity {
 
@@ -39,6 +40,11 @@ public class FurnaceBurnerTileEntity extends AbstractFurnaceTileEntity {
 
 	private boolean burning() {
 		return this.litTime > 0;
+	}
+
+	@Override
+	public int getBurnDuration(ItemStack stack) {
+		return (int) Math.round(super.getBurnDuration(stack) * Config.FURNACE_BURNER_FUEL_DURATION_MULTIPLIER.get());
 	}
 
 	public void tick() {

@@ -14,6 +14,7 @@ public class Config {
 	public static final String CATAGORY_ALTERNATOR = "alternator";
 	public static final String CATAGORY_ROLLING_MILL = "rolling_mill";
 	public static final String CATAGORY_HEATER = "heater";
+	public static final String CATEGORY_FURNACE_BURNER = "furnace_burner";
 	public static final String CATAGORY_WIRES = "wires";
 	public static final String CATAGORY_ACCUMULATOR = "accumulator";
 	public static final String CATAGORY_CHARGER = "charger";
@@ -44,6 +45,8 @@ public class Config {
 	public static ForgeConfigSpec.IntValue HEATER_NORMAL_CONSUMPTION;
 	public static ForgeConfigSpec.IntValue HEATER_FURNACE_ENGINE_CONSUMPTION;
 	public static ForgeConfigSpec.BooleanValue HEATER_FURNACE_ENGINE_ENABLED;
+
+	public static ForgeConfigSpec.DoubleValue FURNACE_BURNER_FUEL_DURATION_MULTIPLIER;
 	
 	public static ForgeConfigSpec.IntValue CONNECTOR_MAX_INPUT;
 	public static ForgeConfigSpec.IntValue CONNECTOR_MAX_OUTPUT;
@@ -142,7 +145,13 @@ public class Config {
 				.define("heater_furnace_engine_enable", false);
 		
 		COMMON_BUILDER.pop();
-		
+
+		COMMON_BUILDER.comment("Furnace burner").push(CATEGORY_FURNACE_BURNER);
+
+		FURNACE_BURNER_FUEL_DURATION_MULTIPLIER = COMMON_BUILDER.comment("Changes how long fuel will burn in the furnace burner (e.g. 2.0 will make fuel last twice as long)")
+			.defineInRange("furnace_burner_fuel_duration_multiplier", 1.0, 0.0, Double.MAX_VALUE);
+
+		COMMON_BUILDER.pop();
 		
 		COMMON_BUILDER.comment("Wires").push(CATAGORY_WIRES);
 		
